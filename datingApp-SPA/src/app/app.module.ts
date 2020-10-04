@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { JwtModule } from '@auth0/angular-jwt';
 
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
@@ -21,11 +22,12 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
-// import { AuthGuard } from './_guards/auth.guard';
-// import { UserService } from './_services/user.service';
-// import { AlertifyService } from './_services/alertify.service';
-// import { AuthService } from './_services/auth.service';
-// import { AppRoutingModule } from '@angular/forms';
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { AuthGuard } from './_guards/auth.guard';
+import { UserService } from './_services/user.service';
+import { AlertifyService } from './_services/alertify.service';
+import { AuthService } from './_services/auth.service';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -46,6 +48,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
       HomeComponent,
       RegisterComponent,
       MemberListComponent,
+      MemberEditComponent,
       ListsComponent,
       MessagesComponent,
       MemberCardComponent,
@@ -69,9 +72,15 @@ export class CustomHammerConfig extends HammerGestureConfig {
     })
   ],
   providers: [
+    AuthService,
     ErrorInterceptorProvider,
+    AlertifyService,
+    AuthGuard,
+    PreventUnsavedChanges,
+    UserService,
     MemberDetailResolver,
     MemberListResolver,
+    MemberEditResolver,
     { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
   ],
   bootstrap: [AppComponent]
