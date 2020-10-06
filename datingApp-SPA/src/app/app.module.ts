@@ -1,13 +1,14 @@
 import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { NgxGalleryModule } from 'ngx-gallery-9';
 import { FormsModule } from '@angular/forms';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { JwtModule } from '@auth0/angular-jwt';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { AppComponent } from './app.component';
@@ -28,17 +29,19 @@ import { UserService } from './_services/user.service';
 import { AlertifyService } from './_services/alertify.service';
 import { AuthService } from './_services/auth.service';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+
 
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
 
-export class CustomHammerConfig extends HammerGestureConfig {
-  overrides = {
-  pinch: { enable: false },
-  rotate: { enable: false },
-  };
-  }
+// export class CustomHammerConfig extends HammerGestureConfig {
+//   overrides = {
+//   pinch: { enable: false },
+//   rotate: { enable: false },
+//   };
+//   }
 
 
 @NgModule({
@@ -52,7 +55,8 @@ export class CustomHammerConfig extends HammerGestureConfig {
       ListsComponent,
       MessagesComponent,
       MemberCardComponent,
-      MemberDetailComponent
+      MemberDetailComponent,
+      PhotoEditorComponent
    ],
   imports: [
     BrowserModule,
@@ -63,6 +67,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     TabsModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     NgxGalleryModule,
+    FileUploadModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,
@@ -81,7 +86,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     MemberDetailResolver,
     MemberListResolver,
     MemberEditResolver,
-    { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
+    //  { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
   ],
   bootstrap: [AppComponent]
 })
