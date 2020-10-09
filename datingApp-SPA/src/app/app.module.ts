@@ -1,6 +1,6 @@
 import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, Pipe } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxGalleryModule } from 'ngx-gallery-9';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,6 +11,7 @@ import { appRoutes } from './routes';
 import { JwtModule } from '@auth0/angular-jwt';
 import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { AppComponent } from './app.component';
@@ -32,12 +33,20 @@ import { AlertifyService } from './_services/alertify.service';
 import { AuthService } from './_services/auth.service';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+// import { TimeAgoPipe } from 'time-ago-pipe';
 
 
 
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
+
+// tslint:disable-next-line: use-pipe-transform-interface
+@Pipe({
+  name: 'timeAgo',
+  pure: false
+})
+export class TimeAgoExtendsPipe extends TimeAgoPipe {}
 
 // export class CustomHammerConfig extends HammerGestureConfig {
 //   overrides = {
@@ -59,7 +68,8 @@ export function tokenGetter() {
       MessagesComponent,
       MemberCardComponent,
       MemberDetailComponent,
-      PhotoEditorComponent
+      PhotoEditorComponent,
+      TimeAgoExtendsPipe
    ],
   imports: [
     BrowserModule,
