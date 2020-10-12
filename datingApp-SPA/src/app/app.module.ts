@@ -12,6 +12,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimeAgoPipe } from 'time-ago-pipe';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { AppComponent } from './app.component';
@@ -33,6 +34,7 @@ import { AlertifyService } from './_services/alertify.service';
 import { AuthService } from './_services/auth.service';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 // import { TimeAgoPipe } from 'time-ago-pipe';
 
 
@@ -79,7 +81,9 @@ export class TimeAgoExtendsPipe extends TimeAgoPipe {}
     FormsModule,
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
+    ButtonsModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
     TabsModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     NgxGalleryModule,
