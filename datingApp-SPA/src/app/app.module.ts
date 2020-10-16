@@ -1,4 +1,3 @@
-import { ListsResolver } from './_resolvers/lists.resolver';
 import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, Pipe } from '@angular/core';
@@ -30,12 +29,16 @@ import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { MessagesResolver } from './_resolvers/messages.resolver';
+import { ListsResolver } from './_resolvers/lists.resolver';
 import { AuthGuard } from './_guards/auth.guard';
 import { UserService } from './_services/user.service';
 import { AlertifyService } from './_services/alertify.service';
 import { AuthService } from './_services/auth.service';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { CommonModule } from '@angular/common';
 
 // import { TimeAgoPipe } from 'time-ago-pipe';
 
@@ -73,12 +76,14 @@ export class TimeAgoExtendsPipe extends TimeAgoPipe {}
       MemberCardComponent,
       MemberDetailComponent,
       PhotoEditorComponent,
-      TimeAgoExtendsPipe
+      TimeAgoExtendsPipe,
+      MemberMessagesComponent,
    ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     // AppRoutingModule,
+    // CommonModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -109,6 +114,7 @@ export class TimeAgoExtendsPipe extends TimeAgoPipe {}
     MemberListResolver,
     MemberEditResolver,
     ListsResolver,
+    MessagesResolver,
     //  { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
   ],
   bootstrap: [AppComponent]
